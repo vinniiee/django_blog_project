@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 
 
 class AboutView(TemplateView):
-    template_name = 'about.html'
+    template_name = 'blog_app/about.html'
 
 
 class PostListView(ListView):
@@ -24,13 +24,13 @@ class PostDetailView(DetailView):
 
 class CreatePostView(LoginRequiredMixin,CreateView):
     login_url = '/login/'
-    redirect_field_name = 'blog/post_detail.html'
+    redirect_field_name = 'blog_app/post_detail.html'
     form_class = PostForm
     model=Post
 
 class PostUpdateView(LoginRequiredMixin,UpdateView):
     login_url = '/login/'
-    redirect_field_name = 'blog/post_detail.html'
+    redirect_field_name = 'blog_app/post_detail.html'
     form_class = PostForm
     model=Post
 
@@ -40,7 +40,7 @@ class PostDeleteView(LoginRequiredMixin,DeleteView):
 
 class DraftListView(LoginRequiredMixin,ListView):
     login_url = '/login/'
-    redirect_field_name = 'blog/post_list.html'
+    redirect_field_name = 'blog_app/post_list.html'
     model = Post
 
     def get_queryset(self):
@@ -67,7 +67,7 @@ def add_comment_to_post(request,pk):
             return redirect('post_detail',pk=post.pk)
     else:
         form = CommentForm()
-    return render(request,'blog/comment_form.html',{'form':form})
+    return render(request,'blog_app/comment_form.html',{'form':form})
 
 
 @login_required
